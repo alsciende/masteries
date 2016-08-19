@@ -29,7 +29,7 @@ var Config = [
 	createMastery("unfazed", 3, 0, 14, 6),
 	createMastery("liquid courage", 3, 0, 16, 0),
 	createMastery("double edge", 3, 0, 16, 2),
-	createMastery("assassin", 3, 0, 16, 5),
+	createMastery("assassin", 5, 0, 16, 5),
 	
 	createMastery("vitality", 9, 1, 0, 3),
 	createMastery("greater vitality", 9, 1, 2, 3),
