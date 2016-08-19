@@ -71,6 +71,7 @@ var Config = [
 $(function () {
 	restoreState();
 	buildUI();
+	defineHash();
 })
 function restoreState() {
 	var hash = location.hash;
@@ -121,6 +122,12 @@ function defineHash() {
 	location.hash = Config.map(function (mastery) {
 		return mastery.element.data('value');
 	}).join('');
+	var spent = 0;
+	Config.forEach(function (mastery) {
+		spent += mastery.element.data('value')
+	});
+	console.log(spent);
+	$('#spent').text(spent);
 }
 function buildUI () {
 	for(var type=0; type<3; type++) {
