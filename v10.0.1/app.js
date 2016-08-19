@@ -30,7 +30,7 @@ var Config = [
 	createMastery("unfazed", 3, 0, 14, 6, "When an enemy evades, your Champions have a X% chance to stack +Y% Critical Damage for their next Critical Hit and become Unstoppable for 1.0 second(s)."),
 	createMastery("liquid courage", 3, 0, 16, 0, "Increase the Attack of all Champions by X%, but they suffer an eternal Poison that drains X% Health each second."),
 	createMastery("double edge", 3, 0, 16, 2, "Increase the Attack of all Champions by X%, but up to Y% Health is lost by Bleeding over Z seconds."),
-	createMastery("assassin", 5, 0, 16, 5, "Against enemies below 18% Health, your Champions gain X% Attack and decrease enemies( defensive Ability Accuracy by Y%. If enemies start the fight below 18%, your Champions also gain 30% offensive Ability Accuracy."),
+	createMastery("assassin", 5, 0, 16, 5, "Against enemies below 18% Health, your Champions gain X% Attack and decrease enemies' defensive Ability Accuracy by Y%. If enemies start the fight below 18%, your Champions also gain 30% offensive Ability Accuracy."),
 	
 	createMastery("vitality", 9, 1, 0, 3, "Increase the Health of all Champions by X."),
 	createMastery("greater vitality", 9, 1, 2, 3, "Increase the Health of all Champions by X%."),
