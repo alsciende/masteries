@@ -103,7 +103,10 @@ function setMasteryValue($mastery, value) {
 		.removeClass('max')
 		.addClass(className)
 		.empty()
-		.append($('<span>').text(text));
+		.append($('<span>').text(text).on('click', function (event) {
+			setMasteryValue($(this).parent(), 0);
+			event.stopPropagation();
+		}));
 	
 }
 function handleClick(event) {
@@ -126,7 +129,6 @@ function defineHash() {
 	Config.forEach(function (mastery) {
 		spent += mastery.element.data('value')
 	});
-	console.log(spent);
 	$('#spent').text(spent);
 }
 function buildUI () {
