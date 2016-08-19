@@ -1,0 +1,192 @@
+@font-face {
+  font-family: 'icons';
+  src:  url('fonts/icons.eot?v7qas4');
+  src:  url('fonts/icons.eot?v7qas4#iefix') format('embedded-opentype'),
+    url('fonts/icons.ttf?v7qas4') format('truetype'),
+    url('fonts/icons.woff?v7qas4') format('woff'),
+    url('fonts/icons.svg?v7qas4#icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-glass-cannon:before {
+  content: "\e900";
+}
+.icon-inequity:before {
+  content: "\e901";
+}
+.icon-suture:before {
+  content: "\e902";
+}
+.icon-stupefy:before {
+  content: "\e903";
+}
+.icon-pacify:before {
+  content: "\e904";
+}
+.icon-prosperity:before {
+  content: "\e905";
+}
+.icon-intelligence:before {
+  content: "\e906";
+}
+.icon-enhanced-fury:before {
+  content: "\e907";
+}
+.icon-cruelty:before {
+  content: "\e908";
+}
+.icon-precision:before {
+  content: "\e909";
+}
+.icon-greater-strength:before {
+  content: "\e90a";
+}
+.icon-assassin:before {
+  content: "\e90b";
+}
+.icon-block-proficiency:before {
+  content: "\e90c";
+}
+.icon-coagulate:before {
+  content: "\e90d";
+}
+.icon-collar-tech:before {
+  content: "\e90e";
+}
+.icon-cosmic-awareness:before {
+  content: "\e90f";
+}
+.icon-courage:before {
+  content: "\e910";
+}
+.icon-deep-wounds:before {
+  content: "\e911";
+}
+.icon-despair:before {
+  content: "\e912";
+}
+.icon-detect-cosmic:before {
+  content: "\e913";
+}
+.icon-detect-mutant:before {
+  content: "\e914";
+}
+.icon-detect-mystic:before {
+  content: "\e915";
+}
+.icon-detect-science:before {
+  content: "\e916";
+}
+.icon-detect-skill:before {
+  content: "\e917";
+}
+.icon-detect-tech:before {
+  content: "\e918";
+}
+.icon-dexterity:before {
+  content: "\e919";
+}
+.icon-double-edge:before {
+  content: "\e91a";
+}
+.icon-energy-resistance:before {
+  content: "\e91b";
+}
+.icon-extended-fury:before {
+  content: "\e91c";
+}
+.icon-greater-vitality:before {
+  content: "\e91d";
+}
+.icon-lesser-cruelty:before {
+  content: "\e91e";
+}
+.icon-lesser-precision:before {
+  content: "\e91f";
+}
+.icon-limber:before {
+  content: "\e920";
+}
+.icon-liquid-courage:before {
+  content: "\e921";
+}
+.icon-mutagenesis:before {
+  content: "\e922";
+}
+.icon-mystic-dispersion:before {
+  content: "\e923";
+}
+.icon-parry:before {
+  content: "\e924";
+}
+.icon-perfect-block:before {
+  content: "\e925";
+}
+.icon-petrify:before {
+  content: "\e926";
+}
+.icon-physical-resistance:before {
+  content: "\e927";
+}
+.icon-pierce:before {
+  content: "\e928";
+}
+.icon-pittance:before {
+  content: "\e929";
+}
+.icon-pure-skill:before {
+  content: "\e92a";
+}
+.icon-recoil:before {
+  content: "\e92b";
+}
+.icon-recovery:before {
+  content: "\e92c";
+}
+.icon-resonate:before {
+  content: "\e92d";
+}
+.icon-salve:before {
+  content: "\e92e";
+}
+.icon-scouter-lens:before {
+  content: "\e92f";
+}
+.icon-serum-science:before {
+  content: "\e930";
+}
+.icon-stand-your-ground:before {
+  content: "\e931";
+}
+.icon-strength:before {
+  content: "\e932";
+}
+.icon-unfazed:before {
+  content: "\e933";
+}
+.icon-vitality:before {
+  content: "\e934";
+}
+.icon-willpower:before {
+  content: "\e935";
+}
+.icon-wisdom:before {
+  content: "\e936";
+}
+

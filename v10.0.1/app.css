@@ -11,29 +11,38 @@ div#wrapper {
 .mastery { 
 	width: 52px; 
 	height: 52px; 
-	background: SaddleBrown; 
+	background: #70380f; 
+	color: peachpuff;
 	position: absolute; 
 	-moz-user-select: none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
 	user-select: none;
 	border: 1px solid black;
+	font-size: 48px;
+	text-align: center;
 }
 .mastery span {
 	background: black;
 	font-size: 16px;
 	font-family: monospace;
 	font-weight: bold;
-	color: yellow;
+	color: grey;
 	position: absolute;
 	top: 40px;
 	left: 25px;
 	padding: 0 5px;
 	white-space: nowrap;
 }
-.mastery span.null {
-	color: grey;
+.mastery.notnull {
+	box-shadow: 0px 0px 2px 1px #f8ff00;
 }
-.mastery span.max {
+.mastery.notnull span {
+	color: yellow;
+}
+.mastery.max {
+	box-shadow: 0px 0px 10px 5px #32cb00;
+}
+.mastery.max span {
 	color: lime;
 }

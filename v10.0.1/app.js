@@ -81,7 +81,7 @@ function restoreState() {
 	});
 }
 function attachMastery(mastery, $container) {
-	var $mastery = $('<div class="mastery" title="'+mastery.name.toUpperCase()+'">');
+	var $mastery = $('<div class="mastery icon-'+mastery.name.replace(/ /g, '-')+'" title="'+mastery.name.toUpperCase()+'">');
 	$mastery
 		.appendTo($container)
 		.css('left', mastery.xpos*52+20)
@@ -95,11 +95,14 @@ function attachMastery(mastery, $container) {
 function setMasteryValue($mastery, value) {
 	var max = $mastery.data('config').max,
 		text = value + '/' + max,
-		className = value ? (value === max ? 'max' : '') : 'null';
+		className = value ? (value === max ? 'max' : 'notnull') : '';
 	$mastery
 		.data('value', value)
+		.removeClass('notnull')
+		.removeClass('max')
+		.addClass(className)
 		.empty()
-		.append($('<span>').addClass(className).text(text));
+		.append($('<span>').text(text));
 	
 }
 function handleClick(event) {
