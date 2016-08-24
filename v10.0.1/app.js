@@ -49,7 +49,7 @@ var translations;
 $(function () {
 	restoreState();
 
-	var supportedLocales = ['en'],
+	var supportedLocales = ['en', 'fr'],
 		locale = 'en';
 	if(supportedLocales.indexOf(window.navigator.language) > -1) locale = window.navigator.language;
 
