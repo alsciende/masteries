@@ -1,0 +1,229 @@
+{
+	"offensive": "Offensive",
+	"defensive": "Défense",
+	"utility": "Utilité",
+	"spent": "points dépensés",
+	"help": "Clic pour ajouter un point ; Ctrl+clic ou Shift+clic pour retirer un point. L'adresse de la page est un perma-lien vers ce build.",
+	"masteries": {
+	   "strength":{
+	      "label": "Puissance",
+	      "description": "Augmente l'Attaque de tous les champions de X."
+	   },
+	   "greater-strength":{
+	      "label": "Force majeure",
+	      "description": "Augmente l'Attaque de tous les champions de X%."
+	   },
+	   "pierce":{
+	      "label": "Percer",
+	      "description": "Les Coups Critiques de tes champions ignorent X% de l'Armure de la cible en plus."
+	   },
+	   "courage":{
+	      "label": "Courage",
+	      "description": "Augmente l'Attaque de tous les champions de X% lorsque leur Vie est en-dessous de 50%."
+	   },
+	   "lesser-precision":{
+	      "label": "Précision mineure",
+	      "description": "Augmente le Taux de Coups Critiques de tous les champions de X%."
+	   },
+	   "lesser-cruelty":{
+	      "label": "Cruauté mineure",
+	      "description": "Augmente les Dégâts Critiques de tous les champions de X%."
+	   },
+	   "extended-fury":{
+	      "label": "Furie étendue",
+	      "description": "Augmente de X seconde(s) la durée de Furie."
+	   },
+	   "precision":{
+	      "label": "Précision",
+	      "description": "Augmente le Taux de Coups Critiques de tous les champions de X%."
+	   },
+	   "cruelty":{
+	      "label": "Cruauté",
+	      "description": "Augmente les Dégâts Critiques de tous les champions de X%."
+	   },
+	   "enhanced-fury":{
+	      "label": "Furie améliorée",
+	      "description": "Augmente de X% l'efficacité de Furie."
+	   },
+	   "pure-skill":{
+	      "label": "Pur skill",
+	      "description": "Grâce à un entraînement de terrain intensif, les champions Virtuoses ignorent X% de l'Armure ennemie supplémentaire avec les Coups Critiques."
+	   },
+	   "mutagenesis":{
+	      "label": "Mutagénèse",
+	      "description": "Une mutagénèse rapide cicatrise les blessures de Saignement chez les champions Mutants X seconde(s) plus vite que chez les non-Mutants."
+	   },
+	   "glass-cannon":{
+	      "label": "Attaquant fragile",
+	      "description": "Augmente l'Attaque de tous les champions de X%, mais réduit leur vie maximum de X%."
+	   },
+	   "despair":{
+	      "label": "Désespoir",
+	      "description": "Les debuffs infligés aux ennemis réduisent leurs effets de soin et de Régénération de X% chacun."
+	   },
+	   "recoil":{
+	      "label": "Recul",
+	      "description": "Augmente les Dégâts infligés par les Super-pouvoirs de X%, mais au prix de Y% de vie à chaque activation."
+	   },
+	   "deep-wounds":{
+	      "label": "Blessures profondes",
+	      "description": "Les effets de Saignement infligés par tes champions durent Xs plus longtemps. S'ils ont plus de points de vie que leur cible, Saignement retire immédiatement Y% de vie supplémentaire de la vie max des ennemis."
+	   },
+	   "unfazed":{
+	      "label": "Impassible",
+	      "description": "Lorsqu'un ennemi esquive, tes champions ont X% de chance de cumuler +X% de dégâts critiques pour leur prochain coup critique et de devenir Irrésistible pendant 1 seconde."
+	   },
+	   "liquid-courage":{
+	      "label": "Courage en bouteille",
+	      "description": "Augmente l'Attaque de tous tes champions de X%. En contrepartie, ils sont affectés par un Poison éternel qui draine X% de leur vie par seconde."
+	   },
+	   "double-edge":{
+	      "label": "Double tranchant",
+	      "description": "Augmente l'Attaque de tous les champions de X%, mais ils perdent jusqu'à Y% de Vie en Saignement pendant Z secondes."
+	   },
+	   "assassin":{
+	      "label": "Assassin",
+	      "description": "Face à des ennemis ayant moins de 18% de vie, tes champions gagnent X% d'Attaque et diminuent la précision de compétence défensive ennemie de Y%. Si les ennemis commencent le combat avec moins de 18% de vie, tes champions gagnent 30% de précision de compétence offensive."
+	   },
+	   "vitality":{
+	      "label": "Vitalité",
+	      "description": "Augmente la Vie de tous tes Champions de X."
+	   },
+	   "greater-vitality":{
+	      "label": "Vitalité majeure",
+	      "description": "Augmente la Vie de tous tes Champions de X%."
+	   },
+	   "salve":{
+	      "label": "Baume",
+	      "description": "Tes champions récupèrent X de Vie deux fois par seconde pendant 60 secondes. Aucun effet sur les robots."
+	   },
+	   "block-proficiency":{
+	      "label": "Efficacité de blocage",
+	      "description": "Augmente l'Efficacité de blocage de tes champions de X%."
+	   },
+	   "energy-resistance":{
+	      "label": "Résistance énergétique",
+	      "description": "Augmente la Résistance aux dégâts Énergétiques de X% pour tous les champions."
+	   },
+	   "recovery":{
+	      "label": "Récupération",
+	      "description": "Augmente la Vie récupérée par tes champions en combat de X%."
+	   },
+	   "perfect-block":{
+	      "label": "Blocage parfait",
+	      "description": "En bloquant, tes champions ont X% de chance d'effectuer un Blocage parfait."
+	   },
+	   "physical-resistance":{
+	      "label": "Résistance physique",
+	      "description": "Augmente la Résistance aux dégâts Physiques de X% pour tous les champions."
+	   },
+	   "stand-your-ground":{
+	      "label": "Tiens bon",
+	      "description": "En bloquant, tes champions ont X% de chance de résister à un Brise Garde."
+	   },
+	   "collar-tech":{
+	      "label": "Collier tech",
+	      "description": "Équipe les champions Tech d'un champ de force inhibant les Gains de Pouvoir ennemis de X%."
+	   },
+	   "serum-science":{
+	      "label": "Sérum scientifique",
+	      "description": "Administre un Sérum aux champions Science qui leur confère +X% de Résistance énergétique."
+	   },
+	   "willpower":{
+	      "label": "Volonté",
+	      "description": "Pour chaque type d'effet néfaste que tes champions subissent, ils régénèrent X% de Vie par seconde et gagnent +Y d'armure jusqu'à expiration de l'effet. Aucun effet sur les robots."
+	   },
+	   "coagulate":{
+	      "label": "Coaguler",
+	      "description": "Tes champions reçoivent X de dégâts en moins des effets de saignement."
+	   },
+	   "inequity":{
+	      "label": "Iniquité",
+	      "description": "Diminue l'Attaque de l'adversaire de X% pour chaque effet néfaste subit, jusqu'à un maximum de 36% de réduction."
+	   },
+	   "suture":{
+	      "label": "Suture",
+	      "description": "Réduit la durée des effets de Saignement de l'ennemi de X%."
+	   },
+	   "resonate":{
+	      "label": "Résonner",
+	      "description": "Le contact avec des attaques physiques résonne chez les ennemis et réduit leur attaque de X% pendant 7 secondes."
+	   },
+	   "wisdom":{
+	      "label": "Sagesse",
+	      "description": "Gagne +X d'XP avec les récompenses d'XP d'invocateur."
+	   },
+	   "limber":{
+	      "label": "Agile",
+	      "description": "Un entraînement physique et mental rigoureux réduit la durée des effets d'Étourdissement infligés par l'ennemi de X%."
+	   },
+	   "intelligence":{
+	      "label": "Intelligence",
+	      "description": "Augmente toutes les récompenses d'XP d'invocateur de X%."
+	   },
+	   "parry":{
+	      "label": "Parade",
+	      "description": "Bloquer au moment où tu es attaqué réduit les dégâts de X%. S'il y a contact, l'attaquant sera étourdit pendant X seconde(s) maximum. La durée d'Étourdissement augmente avec les chances de Blocage parfait."
+	   },
+	   "dexterity":{
+	      "label": "Dextérité",
+	      "description": "Évite toutes les attaques en esquivant vers l'arrière. Esquiver une attaque augmente ton taux de Coups Critiques de +X% pour ta prochaine attaque."
+	   },
+	   "stupefy":{
+	      "label": "Stupéfier",
+	      "description": "Quand tes champions infligent Étourdissement, il dure X seconde(s) de plus."
+	   },
+	   "petrify":{
+	      "label": "Pétrifier",
+	      "description": "Quand tes champions infligent Étourdissement, ils réduisent aussi les gains ennemis de Vie et de Pouvoir jusqu'à X% pendant la durée d'Étourdissement."
+	   },
+	   "pittance":{
+	      "label": "Clopinettes",
+	      "description": "Gagne +X d'Or avec les récompenses d'Or."
+	   },
+	   "pacify":{
+	      "label": "Pacifier",
+	      "description": "Quand tes champions infligent Étourdissement, ils réduisent l'activation des compétences ennemies de X% pendant la durée d'Étourdissement."
+	   },
+	   "prosperity":{
+	      "label": "Prospérité",
+	      "description": "Augmente toutes les récompenses d'Or de X%."
+	   },
+	   "cosmic-awareness":{
+	      "label": "Conscience cosmique",
+	      "description": "Les champions Cosmiques sont emplis d'une perception égalant celle de Heimdall. Réduit l'efficacité de l'Armure renforcée ennemie de X%."
+	   },
+	   "mystic-dispersion":{
+	      "label": "Dispersion mystique",
+	      "description": "Tes champions Mystiques augmentent leur Pouvoir de X% chaque fois qu'un effet bénéfique ennemi expire."
+	   },
+	   "detect-cosmic":{
+	      "label": "Détection (Cosmique)",
+	      "description": "Révèle la classe cachée des ennemis de type Cosmique jusqu'à X étapes de distance sur une carte de quête. Cette information est partagée avec les alliés."
+	   },
+	   "detect-tech":{
+	      "label": "Détection (Tech)",
+	      "description": "Révèle la classe cachée des ennemis de type Tech jusqu'à X étapes de distance sur une carte de quête. Cette information est partagée avec les alliés."
+	   },
+	   "detect-mystic":{
+	      "label": "Détection (Mystique)",
+	      "description": "Révèle la classe cachée des ennemis de type Mystique jusqu'à X étapes de distance sur une carte de quête. Cette information est partagée avec les alliés."
+	   },
+	   "scouter-lens":{
+	      "label": "Lunettes d'éclaireur",
+	      "description": "Révèle l'indice des héros et le nombre d'étoiles des ennemis jusqu'à X étapes de distance sur une carte de quête. Cette information est partagée avec les alliés."
+	   },
+	   "detect-Mutant":{
+	      "label": "Détection (Mutant)",
+	      "description": "Révèle la classe cachée des ennemis de type Mutant jusqu'à X étapes de distance sur une carte de quête. Cette information est partagée avec les alliés."
+	   },
+	   "detect-Science":{
+	      "label": "Détection (Science)",
+	      "description": "Révèle la classe cachée des ennemis de type Science jusqu'à X étapes de distance sur une carte de quête. Cette information est partagée avec les alliés."
+	   },
+	   "detect-Skill":{
+	      "label": "Détection (Skill)",
+	      "description": "Révèle la classe cachée des ennemis de type Skill jusqu'à X étapes de distance sur une carte de quête. Cette information est partagée avec les alliés."
+	   }
+	}
+}

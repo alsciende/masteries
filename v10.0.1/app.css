@@ -12,11 +12,19 @@ div#wrapper {
 	margin: 5px auto; 
 	position: relative; 
 }
+.points {
+	top: 0px;
+	left: 0px;
+	color: white;
+	text-align: center;
+	height: 20px;
+	padding: 3px 0;
+	text-transform: uppercase;
+	font: 16px/22px sans-serif;
+}
 .mastery { 
 	width: 52px; 
 	height: 52px; 
-	background: #70380f; 
-	color: peachpuff;
 	position: absolute; 
 	-moz-user-select: none;
 	-khtml-user-select: none;
@@ -26,6 +34,19 @@ div#wrapper {
 	font-size: 48px;
 	text-align: center;
 	border-radius: 5px;
+	text-shadow: 0px -1px 0px black;
+}
+.mastery.copper {
+	background: #0a290a; 
+	color: #c1f0c1;
+}
+.mastery.bronze {
+	background: #432109; 
+	color: #f3c6a5;
+}
+.mastery.silver {
+	background: #2c333a; 
+	color: #d4d9de;
 }
 .mastery span {
 	background: black;
@@ -50,4 +71,8 @@ div#wrapper {
 }
 .mastery.max span {
 	color: lime;
+}
+.qtip {
+    font: 14px/18px sans-serif;
+    text-align: center;
 }
