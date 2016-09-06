@@ -101,7 +101,7 @@ function setMasteryValue($mastery, rank) {
 	
 	$mastery.qtip({
 		content: {
-			title: $mastery.data('title'),
+			title: $mastery.data('label'),
 			text: text
 		},
 		position: {
