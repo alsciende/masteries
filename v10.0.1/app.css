@@ -63,16 +63,20 @@ div#wrapper {
 .mastery.notnull {
 	box-shadow: 0px 0px 2px 1px #f8ff00;
 }
-.mastery.notnull span {
+.mastery.notnull span, .qtip.notnull .qtip-content {
 	color: yellow;
 }
 .mastery.max {
 	box-shadow: 0px 0px 10px 5px #32cb00;
 }
-.mastery.max span {
+.mastery.max span, .qtip.max .qtip-content {
 	color: lime;
 }
 .qtip {
     font: 14px/18px sans-serif;
     text-align: center;
+}
+span.variable {
+	color: red;
+	font-weight: bold;
 }

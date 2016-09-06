@@ -5,7 +5,6 @@ function getTranslations(locale) {
 	return new Promise(function (resolve, reject) {
 		$.ajax('locale.'+locale+'.json', {
 			success: function (data, textStatus, jqXHR) {
-				console.log("Loaded translation file for locale " + locale, data);
 				resolve(data);
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
@@ -16,27 +15,40 @@ function getTranslations(locale) {
 	});
 }
 
+function createView(rank) {
+	var view = {},
+		variables = ['X', 'Y', 'Z'];
+	if(rank && typeof rank.forEach === "function") {
+		rank.forEach(function (item, index) {
+			view[variables[index]] = '<span class="variable">'+item+'</span>';
+		})
+	} else {
+		view.X = '<span class="variable">'+rank+'</span>';
+	}
+	return view;
+}
+
 function applyTranslations() {
 	Object.keys(translations.masteries).forEach(function (name) {
-		$('#'+name).qtip({
-			content: {
-				title: translations.masteries[name].label,
-				text: translations.masteries[name].description
-			},
-			position: {
-				my: 'bottom center',
-				at: 'top center'
-			},
-			style: 'qtip-jtools'
-		});
+		var translation = translations.masteries[name],
+			$mastery = $('#'+name);
+		
+		$mastery.data('label', translation.label);
+		$mastery.data('description', translation.description);
+		
 	});
+	
 	$('#help').text(translations.help);
 }
 
-function createMastery(name, max, type, xpos, ypos, style) {
+function createMastery(name, max, ranks, type, xpos, ypos, style) {
+	if(max !== ranks.length) {
+		console.log("Error in mastery "+name+". Defined max different from number of ranks.");
+	}
 	return {
 		name,
 		max,
+		ranks,
 		type,
 		xpos,
 		ypos,
@@ -44,50 +56,37 @@ function createMastery(name, max, type, xpos, ypos, style) {
 	};
 }
 
-var translations;
-
-$(function () {
-	restoreState();
-
-	var supportedLocales = ['en', 'fr'],
-		locale = 'en';
-	if(supportedLocales.indexOf(window.navigator.language) > -1) locale = window.navigator.language;
-
-	getTranslations(locale)
-		.then(function (result) {
-			translations = result;
-			buildUI();
-			applyTranslations();
-			defineHash();
-		})
-})
 function restoreState() {
 	var hash = location.hash;
 	if(!hash) return;
 	var digits = hash.substr(1).split('');
-	digits.forEach(function (value, index) {
-		Config[index].value = parseInt(value, 10);
+	digits.forEach(function (rank, index) {
+		masteries[index].rank = parseInt(rank, 10);
 	});
 }
-function attachMastery(mastery, $container) {
-	var $mastery = $('<div class="mastery icon-'+mastery.name+'">');
+
+function attachMastery(configObject, $container) {
+	var $mastery = $('<div class="mastery icon-'+configObject.name+'">');
 	$mastery
 		.appendTo($container)
-		.css('left', mastery.xpos*52+20)
-		.css('top', mastery.ypos*36+20)
-		.attr('id', mastery.name)
-		.data('config', mastery)
-		.addClass(mastery.style)
+		.css('left', configObject.xpos*52+20)
+		.css('top', configObject.ypos*36+20)
+		.attr('id', configObject.name)
+		.data('config', configObject)
+		.data('rank', configObject.rank || 0)
+		.addClass(configObject.style)
 		.on('click', handleClick)
-	mastery.element = $mastery;
-	setMasteryValue($mastery, mastery.value || 0);
+	configObject.element = $mastery;
 }
-function setMasteryValue($mastery, value) {
+
+function setMasteryValue($mastery, rank) {
 	var max = $mastery.data('config').max,
-		text = value + '/' + max,
-		className = value ? (value === max ? 'max' : 'notnull') : '';
+		text = rank + '/' + max,
+		className = rank ? (rank === max ? 'max' : 'notnull') : '',
+		configObject = $mastery.data('config');
+		
 	$mastery
-		.data('value', value)
+		.data('rank', rank)
 		.removeClass('notnull')
 		.removeClass('max')
 		.addClass(className)
@@ -96,28 +95,45 @@ function setMasteryValue($mastery, value) {
 			setMasteryValue($(this).parent(), 0);
 			event.stopPropagation();
 		}));
+
+	var view = createView(rank ? configObject.ranks[rank-1] : 0);
+	var text = Mustache.render($mastery.data('description'), view);
 	
+	$mastery.qtip({
+		content: {
+			title: $mastery.data('title'),
+			text: text
+		},
+		position: {
+			my: 'bottom center',
+			at: 'top center'
+		},
+		style: 'qtip-jtools '+className
+	});
 }
+
 function handleClick(event) {
-	var $mastery = $(this), value = $mastery.data('value');
+	var $mastery = $(this), rank = $mastery.data('rank');
 	if(event.ctrlKey || event.shiftKey) {
-		value--;
+		rank--;
 	} else {
-		value++;
+		rank++;
 	}
-	value = Math.max(value, 0);
-	value = Math.min(value, $mastery.data('config').max);
-	setMasteryValue($mastery, value);
+	rank = Math.max(rank, 0);
+	rank = Math.min(rank, $mastery.data('config').max);
+	setMasteryValue($mastery, rank);
+	$mastery.qtip('toggle', true);
 	defineHash();
 }
+
 function defineHash() {
-	location.hash = Config.map(function (mastery) {
-		return mastery.element.data('value');
+	location.hash = masteries.map(function (mastery) {
+		return mastery.element.data('rank');
 	}).join('');
 	var spent = 0, types = [];
-	Config.forEach(function (mastery) {
-		spent += mastery.element.data('value');
-		types[mastery.type] =  (types[mastery.type] || 0) + mastery.element.data('value');
+	masteries.forEach(function (mastery) {
+		spent += mastery.element.data('rank');
+		types[mastery.type] =  (types[mastery.type] || 0) + mastery.element.data('rank');
 	});
 	$('#spent').text(spent+' '+translations.spent);
 	var typeNames = ['offensive', 'defensive', 'utility'];
@@ -125,78 +141,904 @@ function defineHash() {
 		$('[data-type="'+type+'"] .points').text(translations[typeNames[type]]+" ("+points+")");
 	})
 }
+
 function buildUI () {
 	for(var type=0; type<3; type++) {
 		buildPane(type);
 	}
 }
+
 function buildPane (type) {
-	var masteries = Config.filter(function (mastery) {
-		return mastery.type === type;
-	});
 	var $container = $('.container[data-type="'+type+'"]');
-	masteries.forEach(function (mastery) {
+	masteries.filter(function (mastery) {
+		return mastery.type === type;
+	}).forEach(function (mastery) {
 		attachMastery(mastery, $container);
 	});
 	var $points = $container.find('.points');
 }
 
-var Config = [
-          	createMastery("strength", 9, 0, 0, 3, 'copper'),
-          	createMastery("greater-strength", 9, 0, 2, 3, 'copper'),
-          	createMastery("pierce", 3, 0, 4, 2, 'bronze'),
-          	createMastery("courage", 3, 0, 4, 4, 'copper'),
-          	createMastery("lesser-precision", 5, 0, 6, 1, 'copper'),
-          	createMastery("lesser-cruelty", 5, 0, 6, 3, 'copper'),
-          	createMastery("extended-fury", 4, 0, 6, 6, 'copper'),
-          	createMastery("precision", 5, 0, 8, 1, 'bronze'),
-          	createMastery("cruelty", 5, 0, 8, 3, 'bronze'),
-          	createMastery("enhanced-fury", 9, 0, 8, 6, 'bronze'),
-          	createMastery("pure-skill", 5, 0, 10, 2, 'bronze'),
-          	createMastery("mutagenesis", 5, 0, 10, 5, 'bronze'),
-          	createMastery("glass-cannon", 3, 0, 12, 1, 'bronze'),
-          	createMastery("despair", 3, 0, 12, 5, 'silver'),
-          	createMastery("recoil", 3, 0, 14, 1, 'silver'),
-          	createMastery("deep-wounds", 3, 0, 14, 4, 'silver'),
-          	createMastery("unfazed", 3, 0, 14, 6, 'silver'),
-          	createMastery("liquid-courage", 3, 0, 16, 0, 'silver'),
-          	createMastery("double-edge", 3, 0, 16, 2, 'silver'),
-          	createMastery("assassin", 5, 0, 16, 5, 'silver'),
-          	
-          	createMastery("vitality", 9, 1, 0, 3, 'copper'),
-          	createMastery("greater-vitality", 9, 1, 2, 3, 'copper'),
-          	createMastery("salve", 3, 1, 4, 1, 'bronze'),
-          	createMastery("block-proficiency", 4, 1, 4, 5, 'copper'),
-          	createMastery("energy-resistance", 4, 1, 5, 3, 'copper'),
-          	createMastery("recovery", 3, 1, 6, 1, 'bronze'),
-          	createMastery("perfect-block", 4, 1, 6, 5, 'copper'),
-          	createMastery("physical-resistance", 4, 1, 7, 3, 'copper'),
-          	createMastery("stand-your-ground", 5, 1, 8, 5, 'bronze'),
-          	createMastery("collar-tech", 5, 1, 10, 2, 'bronze'),
-          	createMastery("serum-science", 5, 1, 10, 5, 'bronze'),
-          	createMastery("willpower", 3, 1, 12, 1, 'silver'),
-          	createMastery("coagulate", 3, 1, 14, 0, 'silver'),
-          	createMastery("inequity", 3, 1, 14, 2, 'silver'),
-          	createMastery("suture", 3, 1, 16, 0, 'silver'),
-          	createMastery("resonate", 3, 1, 16, 2, 'silver'),
-          	
-          	createMastery("wisdom", 3, 2, 0, 1, 'copper'),
-          	createMastery("limber", 5, 2, 1, 5, 'copper'),
-          	createMastery("intelligence", 5, 2, 2, 1, 'copper'),
-          	createMastery("parry", 3, 2, 3, 4, 'bronze'),
-          	createMastery("dexterity", 3, 2, 3, 6, 'bronze'),
-          	createMastery("stupefy", 3, 2, 5, 3, 'bronze'),
-          	createMastery("petrify", 3, 2, 5, 5, 'bronze'),
-          	createMastery("pittance", 3, 2, 6, 1, 'bronze'),
-          	createMastery("pacify", 3, 2, 7, 5, 'bronze'),
-          	createMastery("prosperity", 3, 2, 8, 1, 'bronze'),
-          	createMastery("cosmic-awareness", 5, 2, 10, 2, 'bronze'),
-          	createMastery("mystic-dispersion", 5, 2, 10, 5, 'bronze'),
-          	createMastery("detect-cosmic", 3, 2, 12, 3, 'bronze'),
-          	createMastery("detect-tech", 3, 2, 13, 1, 'bronze'),
-          	createMastery("detect-mystic", 3, 2, 13, 5, 'bronze'),
-          	createMastery("scouter-lens", 3, 2, 14, 3, 'silver'),
-          	createMastery("detect-mutant", 3, 2, 15, 1, 'bronze'),
-          	createMastery("detect-science", 3, 2, 15, 5, 'bronze'),
-          	createMastery("detect-skill", 3, 2, 16, 3, 'bronze')
-          ];
+function initMasteries () {
+	$('div.mastery').each(function (index, element) {
+		var $mastery = $(element);
+		setMasteryValue($mastery, $mastery.data('rank') || 0);
+	});
+}
+
+$(function () {
+
+	masteries = Config.map(function (parameters) {
+		return createMastery.apply(this, parameters);
+	});
+
+	restoreState();
+
+	var supportedLocales = ['en', 'fr'],
+		locale = 'en';
+	if(supportedLocales.indexOf(window.navigator.language) > -1) locale = window.navigator.language;
+	
+	getTranslations(locale)
+		.then(function (result) {
+			translations = result;
+			buildUI();
+			applyTranslations();
+			initMasteries();
+			defineHash();
+		})
+})
+
+var translations, masteries, Config = [
+      	[
+     		"strength",
+     		9,
+     		[
+     			6,
+     			9,
+     			12,
+     			15,
+     			18,
+     			21,
+     			24,
+     			27,
+     			33
+     		],
+     		0,
+     		0,
+     		3,
+     		"copper"
+     	],
+     	[
+     		"greater-strength",
+     		9,
+     		[
+     			1.6,
+     			2,
+     			2.4,
+     			2.8,
+     			3.6,
+     			4.4,
+     			5.2,
+     			6.4,
+     			8
+     		],
+     		0,
+     		2,
+     		3,
+     		"copper"
+     	],
+     	[
+     		"pierce",
+     		3,
+     		[
+     			5,
+     			10,
+     			15
+     		],
+     		0,
+     		4,
+     		2,
+     		"bronze"
+     	],
+     	[
+     		"courage",
+     		3,
+     		[
+     			10,
+     			20,
+     			30
+     		],
+     		0,
+     		4,
+     		4,
+     		"copper"
+     	],
+     	[
+     		"lesser-precision",
+     		5,
+     		[
+     			0.5,
+     			1,
+     			1.5,
+     			2,
+     			2.5
+     		],
+     		0,
+     		6,
+     		1,
+     		"copper"
+     	],
+     	[
+     		"lesser-cruelty",
+     		5,
+     		[
+     			2,
+     			4,
+     			6,
+     			8,
+     			10
+     		],
+     		0,
+     		6,
+     		3,
+     		"copper"
+     	],
+     	[
+     		"extended-fury",
+     		4,
+     		[
+     			0.2,
+     			0.4,
+     			0.6,
+     			0.8
+     		],
+     		0,
+     		6,
+     		6,
+     		"copper"
+     	],
+     	[
+     		"precision",
+     		5,
+     		[
+     			2,
+     			4,
+     			6,
+     			8,
+     			10
+     		],
+     		0,
+     		8,
+     		1,
+     		"bronze"
+     	],
+     	[
+     		"cruelty",
+     		5,
+     		[
+     			10,
+     			20,
+     			30,
+     			40,
+     			50
+     		],
+     		0,
+     		8,
+     		3,
+     		"bronze"
+     	],
+     	[
+     		"enhanced-fury",
+     		4,
+     		[
+     			2,
+     			4,
+     			6,
+     			8
+     		],
+     		0,
+     		8,
+     		6,
+     		"bronze"
+     	],
+     	[
+     		"pure-skill",
+     		5,
+     		[
+     			4,
+     			8,
+     			16,
+     			32,
+     			64
+     		],
+     		0,
+     		10,
+     		2,
+     		"bronze"
+     	],
+     	[
+     		"mutagenesis",
+     		5,
+     		[
+     			0.5,
+     			1,
+     			1.5,
+     			2,
+     			2.5
+     		],
+     		0,
+     		10,
+     		5,
+     		"bronze"
+     	],
+     	[
+     		"glass-cannon",
+     		3,
+     		[
+     			2.4,
+     			4.8,
+     			7.2
+     		],
+     		0,
+     		12,
+     		1,
+     		"bronze"
+     	],
+     	[
+     		"despair",
+     		3,
+     		[
+     			5,
+     			10,
+     			15
+     		],
+     		0,
+     		12,
+     		5,
+     		"silver"
+     	],
+     	[
+     		"recoil",
+     		3,
+     		[
+     			[
+     				10,
+     				5
+     			],
+     			[
+     				15,
+     				7.5
+     			],
+     			[
+     				20,
+     				10
+     			]
+     		],
+     		0,
+     		14,
+     		1,
+     		"silver"
+     	],
+     	[
+     		"deep-wounds",
+     		3,
+     		[
+     			[
+     				0.5,
+     				0.2
+     			],
+     			[
+     				1,
+     				0.4
+     			],
+     			[
+     				1.5,
+     				0.6
+     			]
+     		],
+     		0,
+     		14,
+     		4,
+     		"silver"
+     	],
+     	[
+     		"unfazed",
+     		5,
+     		[
+     			[
+     				17,
+     				10
+     			],
+     			[
+     				22,
+     				15
+     			],
+     			[
+     				30,
+     				20
+     			],
+     			[
+     				40,
+     				25
+     			],
+     			[
+     				55,
+     				30
+     			]
+     		],
+     		0,
+     		14,
+     		6,
+     		"silver"
+     	],
+     	[
+     		"liquid-courage",
+     		3,
+     		[
+     			10,
+     			20,
+     			30
+     		],
+     		0,
+     		16,
+     		0,
+     		"silver"
+     	],
+     	[
+     		"double-edge",
+     		3,
+     		[
+     			[
+     				8,
+     				10,
+     				10
+     			],
+     			[
+     				12,
+     				20,
+     				15
+     			],
+     			[
+     				16,
+     				30,
+     				20
+     			]
+     		],
+     		0,
+     		16,
+     		2,
+     		"silver"
+     	],
+     	[
+     		"assassin",
+     		5,
+     		[
+     			[
+     				20,
+     				12
+     			],
+     			[
+     				30,
+     				14
+     			],
+     			[
+     				40,
+     				16
+     			],
+     			[
+     				50,
+     				18
+     			],
+     			[
+     				60,
+     				20
+     			]
+     		],
+     		0,
+     		16,
+     		5,
+     		"silver"
+     	],
+     	[
+     		"vitality",
+     		9,
+     		[
+     			24,
+     			36,
+     			48,
+     			60,
+     			72,
+     			84,
+     			96,
+     			120,
+     			156
+     		],
+     		1,
+     		0,
+     		3,
+     		"copper"
+     	],
+     	[
+     		"greater-vitality",
+     		9,
+     		[
+     			1.6,
+     			2,
+     			2.4,
+     			2.8,
+     			3.6,
+     			4.4,
+     			5.2,
+     			6.4,
+     			8
+     		],
+     		1,
+     		2,
+     		3,
+     		"copper"
+     	],
+     	[
+     		"salve",
+     		3,
+     		[
+     			1,
+     			2,
+     			4
+     		],
+     		1,
+     		4,
+     		1,
+     		"bronze"
+     	],
+     	[
+     		"block-proficiency",
+     		4,
+     		[
+     			2,
+     			4,
+     			6,
+     			8
+     		],
+     		1,
+     		4,
+     		5,
+     		"copper"
+     	],
+     	[
+     		"energy-resistance",
+     		4,
+     		[
+     			1,
+     			2,
+     			3,
+     			4
+     		],
+     		1,
+     		5,
+     		3,
+     		"copper"
+     	],
+     	[
+     		"recovery",
+     		3,
+     		[
+     			5,
+     			10,
+     			15
+     		],
+     		1,
+     		6,
+     		1,
+     		"bronze"
+     	],
+     	[
+     		"perfect-block",
+     		4,
+     		[
+     			1,
+     			2,
+     			3,
+     			4
+     		],
+     		1,
+     		6,
+     		5,
+     		"copper"
+     	],
+     	[
+     		"physical-resistance",
+     		4,
+     		[
+     			1,
+     			2,
+     			3,
+     			4
+     		],
+     		1,
+     		7,
+     		3,
+     		"copper"
+     	],
+     	[
+     		"stand-your-ground",
+     		5,
+     		[
+     			17,
+     			20,
+     			25,
+     			33,
+     			50
+     		],
+     		1,
+     		8,
+     		5,
+     		"bronze"
+     	],
+     	[
+     		"collar-tech",
+     		5,
+     		[
+     			4,
+     			6,
+     			9,
+     			13,
+     			18
+     		],
+     		1,
+     		10,
+     		2,
+     		"bronze"
+     	],
+     	[
+     		"serum-science",
+     		5,
+     		[
+     			2,
+     			4,
+     			8,
+     			16,
+     			32
+     		],
+     		1,
+     		10,
+     		5,
+     		"bronze"
+     	],
+     	[
+     		"willpower",
+     		3,
+     		[
+     			[
+     				0.5,
+     				2
+     			],
+     			[
+     				0.6,
+     				3
+     			],
+     			[
+     				0.7,
+     				4
+     			]
+     		],
+     		1,
+     		12,
+     		1,
+     		"silver"
+     	],
+     	[
+     		"coagulate",
+     		3,
+     		[
+     			10,
+     			20,
+     			30
+     		],
+     		1,
+     		14,
+     		0,
+     		"silver"
+     	],
+     	[
+     		"inequity",
+     		3,
+     		[
+     			2,
+     			4,
+     			6
+     		],
+     		1,
+     		14,
+     		2,
+     		"silver"
+     	],
+     	[
+     		"suture",
+     		3,
+     		[
+     			10,
+     			15,
+     			20
+     		],
+     		1,
+     		16,
+     		0,
+     		"silver"
+     	],
+     	[
+     		"resonate",
+     		3,
+     		[
+     			7,
+     			10,
+     			13
+     		],
+     		1,
+     		16,
+     		2,
+     		"silver"
+     	],
+     	[
+     		"wisdom",
+     		3,
+     		[
+     			10,
+     			20,
+     			30
+     		],
+     		2,
+     		0,
+     		1,
+     		"copper"
+     	],
+     	[
+     		"limber",
+     		5,
+     		[
+     			8,
+     			16,
+     			24,
+     			32,
+     			48
+     		],
+     		2,
+     		1,
+     		5,
+     		"copper"
+     	],
+     	[
+     		"intelligence",
+     		5,
+     		[
+     			4,
+     			8,
+     			12,
+     			16,
+     			20
+     		],
+     		2,
+     		2,
+     		1,
+     		"copper"
+     	],
+     	[
+     		"parry",
+     		3,
+     		[
+     			[
+     				1.5,
+     				20
+     			],
+     			[
+     				1.7,
+     				25
+     			],
+     			[
+     				2,
+     				33
+     			]
+     		],
+     		2,
+     		3,
+     		4,
+     		"bronze"
+     	],
+     	[
+     		"dexterity",
+     		3,
+     		[
+     			10,
+     			25,
+     			33
+     		],
+     		2,
+     		3,
+     		6,
+     		"bronze"
+     	],
+     	[
+     		"stupefy",
+     		3,
+     		[
+     			0.1,
+     			0.3,
+     			0.5
+     		],
+     		2,
+     		5,
+     		3,
+     		"bronze"
+     	],
+     	[
+     		"petrify",
+     		3,
+     		[
+     			10,
+     			20,
+     			30
+     		],
+     		2,
+     		5,
+     		5,
+     		"bronze"
+     	],
+     	[
+     		"pittance",
+     		3,
+     		[
+     			1,
+     			2,
+     			3
+     		],
+     		2,
+     		6,
+     		1,
+     		"bronze"
+     	],
+     	[
+     		"pacify",
+     		3,
+     		[
+     			10,
+     			20,
+     			30
+     		],
+     		2,
+     		7,
+     		5,
+     		"bronze"
+     	],
+     	[
+     		"prosperity",
+     		3,
+     		[
+     			0.4,
+     			1.2,
+     			2
+     		],
+     		2,
+     		8,
+     		1,
+     		"bronze"
+     	],
+     	[
+     		"cosmic-awareness",
+     		5,
+     		[
+     			2.5,
+     			5,
+     			10,
+     			20,
+     			40
+     		],
+     		2,
+     		10,
+     		2,
+     		"bronze"
+     	],
+     	[
+     		"mystic-dispersion",
+     		5,
+     		[
+     			2,
+     			3,
+     			5,
+     			8,
+     			12
+     		],
+     		2,
+     		10,
+     		5,
+     		"bronze"
+     	],
+     	[
+     		"detect-cosmic",
+     		3,
+     		[
+     			1,
+     			2,
+     			3
+     		],
+     		2,
+     		12,
+     		3,
+     		"bronze"
+     	],
+     	[
+     		"detect-tech",
+     		3,
+     		[
+     			1,
+     			2,
+     			3
+     		],
+     		2,
+     		13,
+     		1,
+     		"bronze"
+     	],
+     	[
+     		"detect-mystic",
+     		3,
+     		[
+     			1,
+     			2,
+     			3
+     		],
+     		2,
+     		13,
+     		5,
+     		"bronze"
+     	],
+     	[
+     		"scouter-lens",
+     		3,
+     		[
+     			1,
+     			2,
+     			3
+     		],
+     		2,
+     		14,
+     		3,
+     		"silver"
+     	],
+     	[
+     		"detect-mutant",
+     		3,
+     		[
+     			1,
+     			2,
+     			3
+     		],
+     		2,
+     		15,
+     		1,
+     		"bronze"
+     	],
+     	[
+     		"detect-science",
+     		3,
+     		[
+     			1,
+     			2,
+     			3
+     		],
+     		2,
+     		15,
+     		5,
+     		"bronze"
+     	],
+     	[
+     		"detect-skill",
+     		3,
+     		[
+     			1,
+     			2,
+     			3
+     		],
+     		2,
+     		16,
+     		3,
+     		"bronze"
+     	]
+     ];
