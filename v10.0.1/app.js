@@ -433,6 +433,14 @@ var translations, masteries, Config = [
      			[
      				1.5,
      				0.6
+     			],
+     			[
+     				2,
+     				0.8
+     			],
+     			[
+     				2.5,
+     				1
      			]
      		],
      		0,
