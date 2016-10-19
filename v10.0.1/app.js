@@ -420,7 +420,7 @@ var translations, masteries, Config = [
      	],
      	[
      		"deep-wounds",
-     		3,
+     		5,
      		[
      			[
      				0.5,
