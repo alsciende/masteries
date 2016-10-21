@@ -163,7 +163,7 @@
 	   },
 	   "parry":{
 	      "label": "Parade",
-	      "description": "Bloquer au moment où tu es attaqué réduit les dégâts de {{{X}}}%. S'il y a contact, l'attaquant sera étourdit pendant {{{X}}} seconde(s) maximum. La durée d'Étourdissement augmente avec les chances de Blocage parfait."
+	      "description": "Bloquer au moment où tu es attaqué réduit les dégâts de {{{Y}}}%. S'il y a contact, l'attaquant sera étourdit pendant {{{X}}} seconde(s) maximum. La durée d'Étourdissement augmente avec les chances de Blocage parfait."
 	   },
 	   "dexterity":{
 	      "label": "Dextérité",

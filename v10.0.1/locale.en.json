@@ -163,7 +163,7 @@
 	   },
 	   "parry":{
 	      "label": "Parry",
-	      "description": "Timing a Block right when attacked reduces damage by {{{X}}}%. If contact is made, Stun attackers for up to {{{Y}}} second(s). Stun duration increases with Perfect Block Chance."
+	      "description": "Timing a Block right when attacked reduces damage by {{{Y}}}%. If contact is made, Stun attackers for up to {{{X}}} second(s). Stun duration increases with Perfect Block Chance."
 	   },
 	   "dexterity":{
 	      "label": "Dexterity",
