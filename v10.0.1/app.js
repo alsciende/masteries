@@ -93,9 +93,12 @@ function setMasteryValue($mastery, rank) {
 		.empty()
 		.append($('<span class="rank">').text(text).on('click', function (event) {
 			setMasteryValue($(this).parent(), 0);
+			defineHash();
 			event.stopPropagation();
 		}))
-		.append($('<span class="help">?</span>'))
+		.append($('<span class="help">?</span>').on('click', function (event) {
+			event.stopPropagation();
+		}))
 	;
 
 	var view = createView(rank ? configObject.ranks[rank-1] : 0);
@@ -124,7 +127,6 @@ function handleClick(event) {
 	rank = Math.max(rank, 0);
 	rank = Math.min(rank, $mastery.data('config').max);
 	setMasteryValue($mastery, rank);
-	$mastery.qtip('toggle', true);
 	defineHash();
 }
 
@@ -138,6 +140,7 @@ function defineHash() {
 		types[mastery.type] =  (types[mastery.type] || 0) + mastery.element.data('rank');
 	});
 	$('#spent').text(spent+' '+translations.spent);
+	$('#spent')[spent>59 ? 'addClass' : 'removeClass']('overspent');
 	var typeNames = ['offensive', 'defensive', 'utility'];
 	types.forEach(function (points, type) {
 		$('[data-type="'+type+'"] .points').text(translations[typeNames[type]]+" ("+points+")");

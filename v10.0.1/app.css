@@ -95,3 +95,6 @@ span.variable {
 	color: red;
 	font-weight: bold;
 }
+.overspent {
+	color: red;
+}
