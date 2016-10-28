@@ -48,28 +48,43 @@ div#wrapper {
 	background: #2c333a; 
 	color: #d4d9de;
 }
-.mastery span {
+.mastery span.help {
 	background: black;
 	font-size: 16px;
 	font-family: monospace;
 	font-weight: bold;
 	color: grey;
 	position: absolute;
-	top: 40px;
-	left: 25px;
+	top: -8px;
+	right: -10px;
+	padding: 0 4px;
+	white-space: nowrap;
+	cursor: help;
+	border-radius: 8px;
+}
+.mastery span.rank {
+	background: black;
+	font-size: 16px;
+	font-family: monospace;
+	font-weight: bold;
+	color: grey;
+	position: absolute;
+	bottom: -8px;
+	right: -10px;
 	padding: 0 5px;
 	white-space: nowrap;
+	cursor: default;
 }
 .mastery.notnull {
-	box-shadow: 0px 0px 2px 1px #f8ff00;
+	box-shadow: 0px 0px 2px 2px #f8ff00;
 }
-.mastery.notnull span, .qtip.notnull .qtip-content {
+.mastery.notnull span.rank, .qtip.notnull .qtip-content {
 	color: yellow;
 }
 .mastery.max {
-	box-shadow: 0px 0px 10px 5px #32cb00;
+	box-shadow: 0px 0px 2px 3px #32cb00;
 }
-.mastery.max span, .qtip.max .qtip-content {
+.mastery.max span.rank, .qtip.max .qtip-content {
 	color: lime;
 }
 .qtip {

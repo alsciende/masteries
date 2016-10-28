@@ -91,15 +91,17 @@ function setMasteryValue($mastery, rank) {
 		.removeClass('max')
 		.addClass(className)
 		.empty()
-		.append($('<span>').text(text).on('click', function (event) {
+		.append($('<span class="rank">').text(text).on('click', function (event) {
 			setMasteryValue($(this).parent(), 0);
 			event.stopPropagation();
-		}));
+		}))
+		.append($('<span class="help">?</span>'))
+	;
 
 	var view = createView(rank ? configObject.ranks[rank-1] : 0);
 	var text = Mustache.render($mastery.data('description'), view);
 	
-	$mastery.qtip({
+	$mastery.find('.help').qtip({
 		content: {
 			title: $mastery.data('label'),
 			text: text
