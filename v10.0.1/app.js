@@ -32,12 +32,12 @@ function applyTranslations() {
 	Object.keys(translations.masteries).forEach(function (name) {
 		var translation = translations.masteries[name],
 			$mastery = $('#'+name);
-		
+
 		$mastery.data('label', translation.label);
 		$mastery.data('description', translation.description);
-		
+
 	});
-	
+
 	$('#help').text(translations.help);
 }
 
@@ -84,7 +84,7 @@ function setMasteryValue($mastery, rank) {
 		text = rank + '/' + max,
 		className = rank ? (rank === max ? 'max' : 'notnull') : '',
 		configObject = $mastery.data('config');
-		
+
 	$mastery
 		.data('rank', rank)
 		.removeClass('notnull')
@@ -103,7 +103,7 @@ function setMasteryValue($mastery, rank) {
 
 	var view = createView(rank ? configObject.ranks[rank-1] : 0);
 	var text = Mustache.render($mastery.data('description'), view);
-	
+
 	$mastery.find('.help').qtip({
 		content: {
 			title: $mastery.data('label'),
@@ -178,10 +178,14 @@ $(function () {
 
 	restoreState();
 
-	var supportedLocales = ['en', 'fr'],
-		locale = 'en';
-	if(supportedLocales.indexOf(window.navigator.language) > -1) locale = window.navigator.language;
-	
+	var language = navigator.languages
+			? navigator.languages[0]
+			: (navigator.language || navigator.userLanguage);
+  var locale = defaultLanguage.substr(0,2);
+	var supportedLocales = ['en', 'fr'];
+	var defaultLocale = 'en';
+	if(supportedLocales.indexOf(locale) === -1) locale = defaultLocale;
+
 	getTranslations(locale)
 		.then(function (result) {
 			translations = result;
