@@ -181,7 +181,7 @@ $(function () {
 	var language = navigator.languages
 			? navigator.languages[0]
 			: (navigator.language || navigator.userLanguage);
-  var locale = defaultLanguage.substr(0,2);
+  var locale = language.substr(0,2);
 	var supportedLocales = ['en', 'fr'];
 	var defaultLocale = 'en';
 	if(supportedLocales.indexOf(locale) === -1) locale = defaultLocale;
