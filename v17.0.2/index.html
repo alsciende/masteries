@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>CoC Mastery Builder</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+	<div id="wrapper">
+		<h1>CoC Mastery Builder</h1>
+		<p style="text-align:right;font-weight:bold" id="spent"></p>
+		<div class="container" data-type="0" style="background:maroon"><div class="points"></div></div>
+		<div class="container" data-type="1" style="background:navy"><div class="points"></div></div>
+		<div class="container" data-type="2" style="background:darkgreen"><div class="points"></div></div>
+		<p id="help"></p>
+	</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.js"></script>
+<script src="../hashids.min.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</html>

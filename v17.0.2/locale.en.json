@@ -1,0 +1,229 @@
+{
+	"offensive": "Offensive",
+	"defensive": "Defensive",
+	"utility": "Utility",
+	"spent": "points spent",
+	"help": "Click to add a point ; Control-click or Shift-click to remove a point. Share the address to share your build.",
+	"masteries": {
+	   "strength":{
+	      "label": "Strength",
+	      "description": "Increase the Attack of all Champions by {{{var1}}}."
+	   },
+	   "greater-strength":{
+	      "label": "Greater Strength",
+	      "description": "Increase the Attack of all Champions by {{{var1}}}%."
+	   },
+	   "pierce":{
+	      "label": "Pierce",
+	      "description": "Critical Hits from your Champions ignore an additional {{{var1}}}% Armor."
+	   },
+	   "courage":{
+	      "label": "Courage",
+	      "description": "Increase the Attack of all Champions by {{{var1}}}% while they're below 50% Health."
+	   },
+	   "lesser-precision":{
+	      "label": "Lesser Precision",
+	      "description": "Increase the Critical Rate of all Champions by {{{var1}}}%."
+	   },
+	   "lesser-cruelty":{
+	      "label": "Lesser Cruelty",
+	      "description": "Increase the Critical Damage of all Champions by {{{var1}}}%."
+	   },
+	   "extended-fury":{
+	      "label": "Extended Fury",
+	      "description": "Increase the duration of Fury by {{{var1}}} second(s)."
+	   },
+	   "precision":{
+	      "label": "Precision",
+	      "description": "Increase the Critical Rate of all Champions by {{{var1}}}%."
+	   },
+	   "cruelty":{
+	      "label": "Cruelty",
+	      "description": "Increase the Critical Damage of all Champions by {{{var1}}}%."
+	   },
+	   "enhanced-fury":{
+	      "label": "Enhanced Fury",
+	      "description": "Increase the effectiveness of Fury by {{{var1}}}%."
+	   },
+	   "pure-skill":{
+	      "label": "Pure Skill",
+	      "description": "With extensive field training, Skill Champions ignore an additional {{{var1}}}% enemy Armor with Critical Hits."
+	   },
+	   "mutagenesis":{
+	      "label": "Mutagenesis",
+	      "description": "Rapid mutagenesis closes Bleed wounds in your Mutant Champions {{{var1}}} second(s) faster than non-Mutants."
+	   },
+	   "glass-cannon":{
+	      "label": "Glass Cannon",
+	      "description": "Increase the Attack of all Champions by {{{var1}}}%, but reduce their maximum Health by {{{var1}}}%."
+	   },
+	   "despair":{
+	      "label": "Despair",
+	      "description": "Debuffs applied to enemies reduce their healing and Regeneration effects by {{{var1}}}% each."
+	   },
+	   "recoil":{
+	      "label": "Recoil",
+	      "description": "Increase Special Attack damage for all Champions by {{{var1}}}%, but they sacrifice {{{var2}}}% Health for each activation."
+	   },
+	   "deep-wounds":{
+	      "label": "Deep Wounds",
+	      "description": "Bleed your Champions inflict last {{{var1}}}s longer. If they have more Health Points than their target, their Bleed instantly strikes down an additional {{{var2}}}% max Health from enemies."
+	   },
+	   "unfazed":{
+	      "label": "Unfazed",
+	      "description": "When an enemy evades, your Champions have a {{{var1}}}% chance to stack +{{{var2}}}% Critical Damage for their next Critical Hit and become Unstoppable for 1.0 second(s)."
+	   },
+	   "liquid-courage":{
+	      "label": "Liquid Courage",
+	      "description": "Increase the Attack of all Champions by {{{var1}}}%, but they suffer an eternal Poison that drains 0.6% Health each second."
+	   },
+	   "double-edge":{
+	      "label": "Double Edge",
+	      "description": "Increase the Attack of all Champions by {{{var1}}}%, but up to {{{var2}}}% Health is lost by Bleeding over {{{var3}}} seconds."
+	   },
+	   "assassin":{
+	      "label": "Assassin",
+	      "description": "Against enemies below 18% Health, your Champions gain {{{var1}}}% Attack and decrease enemies' defensive Ability Accuracy by {{{var2}}}%. If enemies start the fight below 18%, your Champions also gain 30% offensive Ability Accuracy."
+	   },
+	   "vitality":{
+	      "label": "Vitality",
+	      "description": "Increase the Health of all Champions by {{{var1}}}."
+	   },
+	   "greater-vitality":{
+	      "label": "Greater Vitality",
+	      "description": "Increase the Health of all Champions by {{{var1}}}%."
+	   },
+	   "salve":{
+	      "label": "Salve",
+	      "description": "Your Champions recover {{{var1}}} Health twice per second for 60 seconds. No effect on robots."
+	   },
+	   "block-proficiency":{
+	      "label": "Block Proficiency",
+	      "description": "Increase the Block Proficiency of your Champions by {{{var1}}}%."
+	   },
+	   "energy-resistance":{
+	      "label": "Energy Resistance",
+	      "description": "Increase Resistance against Energy damage by {{{var1}}}% for all Champions."
+	   },
+	   "recovery":{
+	      "label": "Recovery",
+	      "description": "Increase any Health your Champions recover during a fight by {{{var1}}}%."
+	   },
+	   "perfect-block":{
+	      "label": "Perfect Block",
+	      "description": "While Blocking, your Champions have a {{{var1}}}% chance to perform a Perfect Block."
+	   },
+	   "physical-resistance":{
+	      "label": "Physical Resistance",
+	      "description": "Increase Resistance against Physical damage by {{{var1}}}% for all Champions."
+	   },
+	   "stand-your-ground":{
+	      "label": "Stand Your Ground",
+	      "description": "While Blocking, your Champions have a {{{var1}}}% chance to resist a Block Break."
+	   },
+	   "collar-tech":{
+	      "label": "Collar Tech",
+	      "description": "Retrofit Tech Champions with a field that inhibits enemy Power Gain by {{{var1}}}%."
+	   },
+	   "serum-science":{
+	      "label": "Serum Science",
+	      "description": "Give Science Champions a Serum of +{{{var1}}}% Energy Resistance."
+	   },
+	   "willpower":{
+	      "label": "Willpower",
+	      "description": "For each new type of detrimental effect your Champions suffer, they regenerate {{{var1}}}% Health per second and gain +{{{var2}}} Armor until that effect expires. No effect on robots."
+	   },
+	   "coagulate":{
+	      "label": "Coagulate",
+	      "description": "Your Champions take {{{var1}}}% less damage from any Bleed effect they suffer."
+	   },
+	   "inequity":{
+	      "label": "Inequity",
+	      "description": "Decrease opponent's Attack by {{{var1}}}% for each detrimental effect they suffer, up to a maximum of 36% reduction."
+	   },
+	   "suture":{
+	      "label": "Suture",
+	      "description": "Reduce the duration of enemy Bleed effects by {{{var1}}}%."
+	   },
+	   "resonate":{
+	      "label": "Resonate",
+	      "description": "Contact with Physical Attacks resonates in enemies, reducing their Attack by {{{var1}}}% for 7 seconds."
+	   },
+	   "wisdom":{
+	      "label": "Wisdom",
+	      "description": "Earn +{{{var1}}} XP with all Summoner XP rewards."
+	   },
+	   "limber":{
+	      "label": "Limber",
+	      "description": "Rigorous mental and physical training reduces the duration of enemy Stun effects by {{{var1}}}%."
+	   },
+	   "intelligence":{
+	      "label": "Intelligence",
+	      "description": "Increase all Summoner XP rewards by {{{var1}}}%."
+	   },
+	   "parry":{
+	      "label": "Parry",
+	      "description": "Timing a Block right when attacked reduces damage by {{{var2}}}%. If contact is made, Stun attackers for up to {{{var1}}} second(s). Stun duration increases with Perfect Block Chance."
+	   },
+	   "dexterity":{
+	      "label": "Dexterity",
+	      "description": "Evade all attacks while dodging back. Dodging an attack in this way grants +{{{var1}}}% Critical Rate for your next attack."
+	   },
+	   "stupefy":{
+	      "label": "Stupefy",
+	      "description": "When your Champions inflict Stun, it lasts for {{{var1}}} additional second(s)."
+	   },
+	   "petrify":{
+	      "label": "Petrify",
+	      "description": "When your Champions inflict Stun, they also reduce enemy Health and Power gains by up to {{{var1}}}% for the duration of the Stun."
+	   },
+	   "pittance":{
+	      "label": "Pittance",
+	      "description": "Earn +{{{var1}}} Gold with all Gold rewards."
+	   },
+	   "pacify":{
+	      "label": "Pacify",
+	      "description": "When your Champions inflict Stun, they also reduce enemy ability triggers by {{{var1}}}% for the duration of the Stun."
+	   },
+	   "prosperity":{
+	      "label": "Prosperity",
+	      "description": "Increase all Gold rewards by {{{var1}}}%."
+	   },
+	   "cosmic-awareness":{
+	      "label": "Cosmic Awareness",
+	      "description": "Imbue Cosmic Champions with perception rivalling Heimdall, reducing enemy Armor Up effectiveness by {{{var1}}}%."
+	   },
+	   "mystic-dispersion":{
+	      "label": "Mystic Dispersion",
+	      "description": "Your Mystic Champions accrue {{{var1}}}% Power each time an enemy beneficial effect expires."
+	   },
+	   "detect-cosmic":{
+	      "label": "Detect Cosmic",
+	      "description": "Reveal the hidden Class of Cosmic enemies up to {{{var1}}} steps away on a Quest Map. This information is shared with allies."
+	   },
+	   "detect-tech":{
+	      "label": "Detect Tech",
+	      "description": "Reveal the hidden Class of Tech enemies up to {{{var1}}} steps away on a Quest Map. This information is shared with allies."
+	   },
+	   "detect-mystic":{
+	      "label": "Detect Mystic",
+	      "description": "Reveal the hidden Class of Mystic enemies up to {{{var1}}} steps away on a Quest Map. This information is shared with allies."
+	   },
+	   "scouter-lens":{
+	      "label": "Scouter Lens",
+	      "description": "Reveal the hidden Hero Rating and Star Rating of enemies up to {{{var1}}} steps away on a Quest Map. This information is shared with allies."
+	   },
+	   "detect-mutant":{
+	      "label": "Detect Mutant",
+	      "description": "Reveal the hidden Class of Mutant enemies up to {{{var1}}} steps away on a Quest Map. This information is shared with allies."
+	   },
+	   "detect-science":{
+	      "label": "Detect Science",
+	      "description": "Reveal the hidden Class of Science enemies up to {{{var1}}} steps away on a Quest Map. This information is shared with allies."
+	   },
+	   "detect-skill":{
+	      "label": "Detect Skill",
+	      "description": "Reveal the hidden Class of Skill enemies up to {{{var1}}} steps away on a Quest Map. This information is shared with allies."
+	   }
+	}
+}
