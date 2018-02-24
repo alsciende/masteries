@@ -102,15 +102,15 @@ function setMasteryValue($mastery, rank) {
   });
 }
 
-function isAllowed($mastery) {
-  var requirement = $mastery.data('requirement');
+function isAllowed(mastery) {
+  var requirement = mastery.requirement;
 
   if (requirement === null) {
     return true;
   }
 
   if (typeof requirement === "number") {
-    return types[$mastery.data('type')] >= requirement;
+    return types[mastery.type] >= requirement;
   }
 
   if (typeof requirement === "string") {
@@ -129,7 +129,7 @@ function isAllowed($mastery) {
 
 function handleClick(event) {
   var $mastery = $(this), rank = $mastery.data('config').rank;
-  if (!isAllowed($mastery)) {
+  if (!isAllowed($mastery.data('config'))) {
     $mastery.addClass('flash');
     setTimeout(function () {
       $mastery.removeClass('flash');
@@ -176,11 +176,21 @@ function updateSpent() {
 
 function updatePi() {
   var pi = 0;
+  var next = [];
   masteries.forEach(function (mastery) {
     for (var i = 0; i < mastery.rank; i++) {
       pi += mastery.ranks[i].pi;
     }
+    if(mastery.ranks[mastery.rank] && isAllowed(mastery)) {
+      next.push(mastery);
+    }
   });
+  next = next.sort(function (a,b) { return b.ranks[b.rank].pi - a.ranks[a.rank].pi; });
+  var table = [];
+  for(var i=0; i<next.length && i<10; i++) {
+    table.push([next[i].name, next[i].ranks[next[i].rank].pi]);
+  }
+  console.table(table);
   $('#pi').text(Mustache.render(translations.pi, { pi: pi.toFixed(2) })).attr('title', Mustache.render('10000 => {{{val}}}', { val: Math.round(10000 * (1 + pi / 100)) }));
 }
 

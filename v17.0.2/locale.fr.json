@@ -2,7 +2,8 @@
 	"offensive": "Offensive",
 	"defensive": "Défense",
 	"utility": "Utilité",
-	"spent": "points dépensés",
+	"spent": "Points dépensés : {{{spent}}}",
+	"pi": "Augmentation PI : +{{{pi}}}%",
 	"help": "Clic pour ajouter un point ; Ctrl+clic ou Shift+clic pour retirer un point. L'adresse de la page est un perma-lien vers ce build.",
     "requirement": "Requiert {{{points}}} points dans cette section.",
 	"masteries": {
